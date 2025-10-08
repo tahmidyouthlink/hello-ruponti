@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello Ruponti — The Art of Journey</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Merriweather:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Literata:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baskervville&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style_fixed.css" />
+  </head>
+  <body>
+    <div class="video-background">
+      <video playsinline autoplay muted loop poster="poster.jpg">
+        <source src="background-video.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <div class="content-overlay">
+      <div class="content-wrapper">
+        <div class="header-group">
+          <div class="title-container">
+            <span class="static-hello">Hello</span>
+            <div class="animated-word">
+              <span class="ruponti-en word show">Ruponti</span>
+              <span class="ruponti-bn word">রূপন্তি</span>
+            </div>
+          </div>
+          <p class="tagline">
+            Technology fades into feeling - a journey through moods, stories,
+            and souls.
+          </p>
+        </div>
+
+        <div class="action-group">
+          <button
+            class="cta-open"
+            aria-haspopup="dialog"
+            aria-controls="earlyModal"
+          >
+            Join the Community
+          </button>
+        </div>
+
+        <div class="footer-group">
+          <footer>&copy; 2025 Hello Ruponti — the continuity of beauty.</footer>
+        </div>
+      </div>
+    </div>
+
+    <!-- Minimal Modal -->
+    <div
+      class="modal-overlay"
+      id="earlyModal"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+    >
+      <div class="modal-card" role="document">
+        <form class="modal-form" id="earlyForm">
+          <textarea
+            name="thoughts"
+            rows="4"
+            class="modal-textarea"
+            placeholder="Tell us one line…"
+            required
+          ></textarea>
+          <button type="button" class="reveal-email" aria-expanded="false">
+            What's your email?
+          </button>
+          <input
+            type="email"
+            name="email"
+            class="modal-email"
+            placeholder="you@example.com"
+            aria-label="Your email"
+            required
+          />
+          <div class="modal-actions">
+            <button type="submit" class="cta-btn">Join</button>
+            <button type="button" class="modal-cancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script_fixed.js"></script>
+  </body>
+</html>

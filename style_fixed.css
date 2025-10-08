@@ -1,0 +1,593 @@
+:root {
+  --terracotta: #a95b34;
+  --deep-green: #345940;
+  --dusk-blue: #4e5d6c;
+  --off-white: #f7f4ed;
+  --font-sans: "Merriweather", sans-serif;
+  --font-bengali: "BL Fiona Bangla", sans-serif;
+}
+
+/* Load locally provided BL Fiona Bangla font files (adjust paths if placed in /fonts) */
+@font-face {
+  font-family: "BL Fiona Bangla";
+  src: url("BL Fiona Bangla Unicode.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "BL Fiona Bangla";
+  src: url("BL Fiona Bangla Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  font-family: var(--font-sans);
+  background-color: var(--off-white);
+  color: var(--deep-green);
+  overflow: hidden;
+}
+
+/* Background video */
+.video-background {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+.video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Content overlay */
+.content-overlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: rgba(247, 244, 237, 0.85);
+}
+.content-wrapper {
+  max-width: 40em;
+  text-align: center;
+}
+
+/* Progressive enhancement */
+.header-group,
+.action-group,
+.footer-group {
+  transition: opacity 0.8s ease;
+}
+html.js .header-group,
+html.js .action-group,
+html.js .footer-group {
+  opacity: 0;
+}
+html.js .header-group.show,
+html.js .action-group.show,
+html.js .footer-group.show {
+  opacity: 1;
+}
+
+/* Title row */
+.title-container {
+  display: inline-flex;
+  align-items: baseline; /* share baseline for EN + BN */
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+.static-hello {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 400;
+  font-size: 2.6rem;
+  color: var(--deep-green);
+  display: inline-block;
+  letter-spacing: 0.4px;
+}
+
+/* Guaranteed word-space after "Hello" */
+.static-hello::after {
+  content: "";
+  display: inline-block;
+  width: 0.35em; /* adjust 0.25em–0.45em to taste */
+}
+
+/* Animated word container */
+.animated-word {
+  display: inline-grid; /* overlay children; container sized by widest child */
+  align-items: baseline;
+  line-height: 1;
+  margin-left: 0; /* no negative margins */
+  color: var(--terracotta); /* terracotta for Ruponti (EN/BN) */
+}
+
+/* stack both words in the same grid cell */
+.word {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+  will-change: opacity;
+  pointer-events: none;
+  width: 100%; /* <- ensures both align identically */
+  text-align: left;
+}
+.word.show {
+  opacity: 1;
+}
+
+/* English Ruponti */
+.ruponti-en {
+  font-family: "Merriweather", serif;
+  font-size: 2.8rem; /* slightly larger for optical balance */
+  letter-spacing: 0.3px;
+  transform: translateY(1px);
+}
+
+/* Bengali রূপন্তি */
+.ruponti-bn {
+  font-family: var(--font-bengali);
+  font-size: 2.9rem; /* slightly larger for optical balance */
+  transform: translateY(2px); /* baseline harmony with Latin */
+}
+
+/* Tagline */
+.tagline {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--dusk-blue);
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+}
+
+/* New CTA styles */
+.microcopy {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: rgba(52, 89, 64, 0.9);
+}
+.cta {
+  margin-top: 0.75rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 0.6rem;
+  justify-content: center;
+  align-items: start;
+  max-width: 34rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-input {
+  grid-column: 1 / 2;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid rgba(169, 91, 52, 0.45);
+  background: transparent;
+  color: var(--deep-green);
+  min-width: 16rem;
+}
+.cta-textarea {
+  grid-column: 1 / 3;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid rgba(169, 91, 52, 0.35);
+  background: transparent;
+  color: var(--deep-green);
+  resize: vertical;
+}
+.cta-btn {
+  grid-column: 2 / 3;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--terracotta);
+  background: var(--terracotta);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.cta-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+.privacy-note {
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  color: rgba(52, 89, 64, 0.6);
+  letter-spacing: 0.03em;
+}
+
+.action-group {
+  margin-top: 2.2rem;
+}
+.footer-group {
+  margin-top: 4.2rem;
+}
+.coming-soon {
+  display: none;
+} /* no longer used */
+
+footer {
+  font-size: 0.8rem;
+  color: rgba(52, 89, 64, 0.6);
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 768px) {
+  .static-hello {
+    font-size: 2rem;
+  }
+  .animated-word {
+    font-size: 2.3rem;
+  }
+  .tagline {
+    font-size: 1rem;
+  }
+  .action-group {
+    margin-top: 2rem;
+  }
+  .footer-group {
+    margin-top: 3.5rem;
+  }
+  .cta {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  .cta-btn {
+    grid-column: 1 / 2;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .word {
+    transition: none;
+  }
+}
+
+/* --- Modal Popup --- */
+.cta-open {
+  margin-top: 0.9rem;
+  border: 1px solid var(--terracotta);
+  background: var(--terracotta);
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.2s ease;
+}
+.cta-open:hover {
+  transform: translateY(-1px);
+  opacity: 0.96;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  z-index: 50;
+}
+.modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-card {
+  width: min(92vw, 560px);
+  background: rgba(247, 244, 237, 0.96);
+  border: 1px solid rgba(169, 91, 52, 0.25);
+  border-radius: 18px;
+  padding: 1.2rem 1.2rem 1rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  transform: translateY(12px) scale(0.98);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.modal-overlay.show .modal-card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: transparent;
+  border: 0;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: rgba(52, 89, 64, 0.8);
+  cursor: pointer;
+}
+.modal-close:hover {
+  color: rgba(52, 89, 64, 1);
+}
+
+#modalTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
+  color: var(--deep-green);
+  margin-top: 0.2rem;
+}
+.modal-sub {
+  color: var(--dusk-blue);
+  margin: 0.3rem 0 0.6rem;
+}
+
+.modal-form {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 0.4rem;
+}
+.modal-form .label {
+  display: block;
+  font-size: 0.85rem;
+  color: rgba(52, 89, 64, 0.8);
+  margin-bottom: 0.25rem;
+}
+.modal-form input,
+.modal-form textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(169, 91, 52, 0.35);
+  background: transparent;
+  color: var(--deep-green);
+}
+.modal-actions {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-end;
+  margin-top: 0.2rem;
+}
+.modal-cancel {
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(169, 91, 52, 0.35);
+  background: transparent;
+  color: var(--terracotta);
+  cursor: pointer;
+}
+.modal-cancel:hover {
+  background: rgba(169, 91, 52, 0.08);
+}
+
+.modal-note {
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+  color: rgba(52, 89, 64, 0.65);
+}
+
+/* --- Minimal CTA & Modal --- */
+.cta-open {
+  margin-top: 1rem;
+  border: 1px solid var(--terracotta);
+  background: var(--terracotta);
+  color: #fff;
+  padding: 0.72rem 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.2s ease;
+}
+.cta-open:hover {
+  transform: translateY(-1px);
+  opacity: 0.96;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  z-index: 50;
+}
+.modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: transparent;
+  border: 0;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: rgba(52, 89, 64, 0.8);
+  cursor: pointer;
+}
+.modal-close:hover {
+  color: rgba(52, 89, 64, 1);
+}
+
+#modalTitle {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
+  color: var(--deep-green);
+  margin: 0.2rem 0 0.6rem;
+  text-align: center;
+}
+
+.modal-form {
+  display: grid;
+  gap: 0.7rem;
+}
+.modal-textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(169, 91, 52, 0.3);
+  background: transparent;
+  color: var(--deep-green);
+  border-radius: 12px;
+  resize: vertical;
+  min-height: 120px;
+  font-size: 1rem;
+}
+.reveal-email {
+  justify-self: start;
+  background: transparent;
+  border: 0;
+  color: var(--terracotta);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0.2rem 0;
+}
+.modal-email {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(169, 91, 52, 0.3);
+  background: transparent;
+  color: var(--deep-green);
+  border-radius: 10px;
+}
+.modal-actions {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-end;
+  margin-top: 0.2rem;
+}
+.modal-cancel {
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(169, 91, 52, 0.35);
+  background: transparent;
+  color: var(--terracotta);
+  cursor: pointer;
+  border-radius: 999px;
+}
+.cta-btn {
+  padding: 0.65rem 1.1rem;
+  border: 1px solid var(--terracotta);
+  background: var(--terracotta);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.cta-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+/* --- Spacing refinement between Hello and Ruponti --- */
+.static-hello::after {
+  width: 0.22em;
+} /* slightly tighter word-space */
+.animated-word {
+  margin-left: -0.04em;
+} /* cancel hidden side-bearings */
+
+/* --- Welcoming CTA button --- */
+.cta-open {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
+  border-radius: 999px;
+  background: var(--terracotta);
+  color: #fff;
+  padding: 0.78rem 1.3rem;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  border: 1px solid rgba(169, 91, 52, 0.6);
+  transition: transform 0.18s ease, box-shadow 0.25s ease,
+    background-color 0.22s ease, color 0.22s ease;
+}
+.cta-open:hover {
+  transform: translateY(-1px) scale(1.015);
+  background: var(--deep-green);
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+}
+
+/* --- Lighter, airier modal --- */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.28);
+}
+.modal-form {
+  gap: 0.6rem;
+}
+.modal-textarea {
+  border: 1px solid rgba(169, 91, 52, 0.25);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  background: rgba(255, 255, 255, 0.4);
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.modal-textarea:focus,
+.modal-email:focus {
+  border-color: rgba(169, 91, 52, 1);
+  outline: none;
+}
+
+.modal-textarea::placeholder {
+  opacity: 0.7;
+  font-style: italic;
+}
+.modal-email {
+  border: 1px solid rgba(169, 91, 52, 0.22);
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+  background: rgba(255, 255, 255, 0.4);
+  transition: border-color 0.3s ease;
+}
+.reveal-email {
+  align-self: start;
+  color: var(--terracotta);
+  border: 0;
+  background: transparent;
+  text-decoration: none;
+  opacity: 0.9;
+  padding-top: 8px;
+}
+.reveal-email:hover {
+  opacity: 1;
+}
+
+.modal-actions {
+  gap: 0.5rem;
+}
+.modal-cancel {
+  border-radius: 999px;
+  color: var(--terracotta);
+  border: 1px solid rgba(169, 91, 52, 0.28);
+  padding: 0.55rem 1rem;
+}
+.cta-btn {
+  border-radius: 999px;
+  padding: 0.58rem 1.05rem;
+}
+.cta-btn:hover {
+  transform: translateY(-1px);
+}
