@@ -363,16 +363,6 @@ footer {
   justify-content: flex-end;
   margin-top: 0.2rem;
 }
-.modal-cancel {
-  padding: 0.6rem 1rem;
-  border: 1px solid rgba(169, 91, 52, 0.35);
-  background: transparent;
-  color: var(--terracotta);
-  cursor: pointer;
-}
-.modal-cancel:hover {
-  background: rgba(169, 91, 52, 0.08);
-}
 
 .modal-note {
   margin-top: 0.6rem;
@@ -476,14 +466,7 @@ footer {
   justify-content: flex-end;
   margin-top: 0.2rem;
 }
-.modal-cancel {
-  padding: 0.6rem 1rem;
-  border: 1px solid rgba(169, 91, 52, 0.35);
-  background: transparent;
-  color: var(--terracotta);
-  cursor: pointer;
-  border-radius: 999px;
-}
+
 .cta-btn {
   padding: 0.65rem 1.1rem;
   border: 1px solid var(--terracotta);
@@ -578,12 +561,7 @@ footer {
 .modal-actions {
   gap: 0.5rem;
 }
-.modal-cancel {
-  border-radius: 999px;
-  color: var(--terracotta);
-  border: 1px solid rgba(169, 91, 52, 0.28);
-  padding: 0.55rem 1rem;
-}
+
 .cta-btn {
   border-radius: 999px;
   padding: 0.58rem 1.05rem;
